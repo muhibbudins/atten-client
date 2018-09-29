@@ -1,15 +1,37 @@
-let scanner = new Instascan.Scanner({ video: document.getElementById('page__video') });
+const form = document.getElementById('generator')
+const formName = document.getElementById('fullName')
+let current = {}
 
-Instascan.Camera.getCameras().then(function (cameras) {
-  if (cameras.length > 0) {
-    scanner.start(cameras[0]);
-  } else {
-    console.error('No cameras found.');
-  }
-}).catch(function (e) {
-  console.error(e);
-});
+getLocation().then(function(result) {
+  current = result
+})
 
-scanner.addListener('scan', function (content) {
-  console.log(content);
-});
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  console.log(formName.value, current)
+}, false)
+
+function getLocation() {
+  return new Promise(function(resolve, reject) {
+    if (!navigator.geolocation){
+      reject('Geolocation is not supported by your browser');
+      return;
+    }
+
+    function success(position) {
+      var latitude  = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      
+      resolve({
+        latitude,
+        longitude
+      })
+    }
+
+    function error() {
+      reject('Unable to retrieve your location');
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
+  })
+}

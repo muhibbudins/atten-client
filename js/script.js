@@ -15,6 +15,7 @@ form.addEventListener('submit', function(e) {
   new QRCode('code', {
     text: JSON.stringify({
       name: formName.value,
+      date: new Date(),
       location: current
     }),
     width: 400,

@@ -2,7 +2,7 @@
 
 QR Code generator for [Atten](https://github.com/muhibbudins/atten) Project. This project use **Geo Location Navigator** for collecting your location, so if you can't run this project. Please consider to view this compatibility table :
 
-[**Geo Location**](https://caniuse.com/#feat=geolocation)
+- [**Geo Location**](https://caniuse.com/#feat=geolocation)
 
 ## Credits
 

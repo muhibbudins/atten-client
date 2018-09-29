@@ -1,5 +1,6 @@
 const form = document.getElementById('generator')
 const formName = document.getElementById('fullName')
+
 let current = {}
 
 getLocation().then(function(result) {
@@ -8,7 +9,20 @@ getLocation().then(function(result) {
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-  console.log(formName.value, current)
+
+  this.style.display = 'none'
+
+  new QRCode('code', {
+    text: JSON.stringify({
+      name: formName.value,
+      location: current
+    }),
+    width: 400,
+    height: 400,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+  })
 }, false)
 
 function getLocation() {
